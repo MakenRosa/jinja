@@ -1472,6 +1472,40 @@ two categories:
     Get an attribute of an object.  (See :ref:`variables`)
 
 
+Operator Precedence
+~~~~~~~~~~~~~~~~~~~
+
+Expressions are grouped by operator precedence. Operators with higher
+precedence are evaluated before operators with lower precedence. Parentheses
+can always be used to group an expression explicitly.
+
+The following list shows precedence from lowest to highest:
+
+-   Inline if expressions: ``a if condition else b``
+-   ``or``
+-   ``and``
+-   ``not``
+-   Comparisons: ``==``, ``!=``, ``>``, ``>=``, ``<``, ``<=``, ``in``,
+    ``not in``
+-   Addition and subtraction: ``+``, ``-``
+-   String concatenation: ``~``
+-   Multiplication, division, floor division, and modulo: ``*``, ``/``,
+    ``//``, ``%``
+-   Power: ``**``
+-   Unary positive and negative: ``+expr``, ``-expr``
+-   Calls, attributes, item lookup, filters, and tests: ``()``, ``.``,
+    ``[]``, ``|``, ``is``
+
+Most binary operators group from left to right. The ``**`` operator also
+groups from left to right in Jinja, unlike Python. See the note in the
+``**`` operator description above.
+
+For example, ``{{ 1 + 2 * 3 }}`` is evaluated as ``{{ 1 + (2 * 3) }}``
+and returns ``7``. Filters and tests bind to the expression immediately before
+them, so ``{{ 1 + "2"|int }}`` is evaluated as ``{{ 1 + ("2"|int) }}``,
+and ``{{ xs|length > 0 }}`` is evaluated as ``{{ (xs|length) > 0 }}``.
+
+
 .. _if-expression:
 
 If Expression
